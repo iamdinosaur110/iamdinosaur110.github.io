@@ -1,0 +1,17 @@
+p
+{
+	background: #c4c0aa;
+}
+#area1
+{
+	text-align: center;
+}
+p::first-line
+{
+	color:#296bc7;
+}
+
+body{
+	background: -webkit-linear-gradient(-8deg,rgb(255,255,255),rgb(0,59,119));
+}
+
