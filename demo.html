@@ -1,1 +1,57 @@
-
+<!DOCTYPE html>
+<html>
+<head>
+   <title>貨幣轉換</title>
+   <link rel='stylesheet' href='mystyle.css'>
+</head>
+<body>
+   <h1>Currency Converter</h1>
+   <p>輸入你要查詢金額</p>
+   <p id="area1">請注意輸入數字 </p>
+   <form>
+      <label>From:</label>
+      <select id="from">
+         <option value="USD">USD</option>
+         <option value="EUR">EUR</option>
+         <option value="AUD">AUD</option>
+         <option value="JPY">JPY</option>
+         <option value="KRW">KRW</option>
+      </select>
+      <label>To:</label>
+      <select id="to">
+         <option value="USD">USD</option>
+         <option value="EUR">EUR</option>
+         <option value="GBP">GBP</option>
+         <option value="JPY">JPY</option>
+         <option value="KRW">KRW</option>
+      </select>
+      <label>金額：</label>
+      <input type="text" id="amount" />
+      <button type="button" id="convert">Convert</button>
+      <button type="reset" id="Reset">reset</button>
+      <p id="result"></p>
+   </form>
+   <script>
+      const convert = document.getElementById("convert");
+      const result = document.getElementById("result");
+      const from = document.getElementById("from");
+      const to = document.getElementById("to");
+      const amount = document.getElementById("amount");
+      convert.addEventListener("click", function() {
+         let fromCurrency = from.value;
+         let toCurrency = to.value;
+         let amt = amount.value;
+         fetch(`https://api.exchangerate-api.com/v4/latest/${fromCurrency}`)
+         .then(response => {
+               return response.json();
+         })
+         .then(data => {
+            let rate = data.rates[toCurrency];
+            let total = rate * amt;
+            result.innerHTML = `${amt} ${fromCurrency} = ${total}
+            ${toCurrency}`;
+         });
+      });
+   </script>
+</body>
+</html>
